@@ -17,7 +17,13 @@ const adminSchema = new Schema<AdminEntity>({
         type: String,
         required: true,
       },
-      
+      role: {
+        type: String,
+        enum: ["user", "admin", "salon"],
+        default: "admin",
+      },
+      userList:[{ type: Schema.Types.ObjectId, ref: "User" }],
+    //   salonList:{ type: Schema.Types.ObjectId, ref: "Theater" }]
     },
     {
         timestamps: true,

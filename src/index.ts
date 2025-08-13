@@ -7,7 +7,6 @@ import dotenv from "dotenv";
 import app from "@/presentation/server";
 dotenv.config(); // Load environment variables
 
-// Function to initialize an admin (example)
 
 
 
@@ -22,8 +21,8 @@ dotenv.config(); // Load environment variables
         process.exit(0); // Exit on DB connection failure
       });
     // Start the server
-    app.listen(Number(process.env.PORT) || 1001, () => {
-      console.log(`Server started on port ${process.env.PORT || 1001}`);
+    app.listen(Number(process.env.PORT) || 2001, () => {
+      console.log(`Server started on port ${process.env.PORT || 2001}`);
     });
 
   } catch (error: any) {

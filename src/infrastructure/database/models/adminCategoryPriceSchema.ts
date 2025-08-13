@@ -14,11 +14,11 @@ const adminAddCategoryAndPriceSchema = new Schema({
     type: Number,
     required: true,
   },
-  maxAdults: {
+  AdultsCount: {
     type: Number,
     required: false,
   },
-  maxChildren: {
+  ChildrenCount: {
     type: Number,
     required: false,
   }

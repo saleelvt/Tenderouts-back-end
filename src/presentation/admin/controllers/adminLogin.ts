@@ -21,7 +21,7 @@ export const loginAdminController = (dependencies: IAdminDependencies) => {
                 return res.status(401).json({ success: false, message: "Invalid credentials" });
             }
 
-            return res.status(200).json({ success: true, message: "Admin successfully logged in" });
+            return res.status(200).json({ success: true, message: "Admin successfully logged in",role:"admin" });
         } catch (error) {
             console.error("Failed to log in admin:", error);
             // Pass error to the next error handler
