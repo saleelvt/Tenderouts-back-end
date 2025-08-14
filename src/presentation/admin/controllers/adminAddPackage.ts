@@ -29,8 +29,8 @@ export const adminAddPackageController = (dependencies: IAdminDependencies) => {
                 categoryType,
                 adultPrice,
                 childPrice,
-                AdultsCount: adultCount || 1,   // map camelCase to DB field
-                ChildrenCount: childCount || 1, // map camelCase to DB field
+                AdultsCount: adultCount || 0,   // map camelCase to DB field
+                ChildrenCount: childCount || 0, // map camelCase to DB field
             });
 
             await newCategoryPrice.save();

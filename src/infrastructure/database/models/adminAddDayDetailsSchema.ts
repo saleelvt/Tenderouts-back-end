@@ -4,7 +4,7 @@ const hotelSchema = new Schema({
    name: { type: String, required: true },
    category: { type: String, enum: ['Normal', 'Premium', 'Luxury'], required: true },
 }, { _id: false });
- 
+
 const activitySchema = new Schema({
   title: { type: String, required: true },
   description: { type: String },

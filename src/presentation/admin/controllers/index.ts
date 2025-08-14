@@ -2,11 +2,18 @@ import { IAdminDependencies } from "@/application/admin/interfaces/IAdminDepende
 import { loginAdminController } from "./adminLogin";
 import { adminAddPackageController } from "./adminAddPackage";
 import { adminAddDayWisePackageController } from "./adminAddDayDetailedPackage";
+import { adminDeletePackageController } from "./deletePackage";
+import { adminDeleteDetailedPackageController } from "./deleteDetailedPackage";
+import { adminGetPackagesController } from "./adminGetPackages";
+
 
 export const adminController = (dependencies: IAdminDependencies) => {
     return {
         loginAdmin: loginAdminController(dependencies), // No change needed here.
         adminAddPackage:adminAddPackageController(dependencies),
         adminAddDayDetailedPackage:adminAddDayWisePackageController(dependencies),
+        deletePackage:adminDeletePackageController(dependencies),
+        deleteDeatailedPackage:adminDeleteDetailedPackageController(dependencies),
+        adminGetPackages:adminGetPackagesController(dependencies)
     };
 };
