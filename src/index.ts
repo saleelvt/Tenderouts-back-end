@@ -1,10 +1,10 @@
 // main file (e.g., index.ts)
 
-
+import 'module-alias/register';
 import { db } from "./boot/db";
 import dotenv from "dotenv";
 
-import app from "@/presentation/server";
+import app from "./presentation/server";
 dotenv.config(); // Load environment variables
 
 
