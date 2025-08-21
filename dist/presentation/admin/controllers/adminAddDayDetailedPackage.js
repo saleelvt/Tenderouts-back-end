@@ -16,7 +16,6 @@ exports.adminAddDayWisePackageController = void 0;
 const adminAddDayDetailsSchema_1 = require("@/infrastructure/database/models/adminAddDayDetailsSchema");
 const mongoose_1 = __importDefault(require("mongoose"));
 const adminAddDayWisePackageController = (dependencies) => {
-    console.log(">>> inside adminAddDayWisePackageController <<<");
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
         try {

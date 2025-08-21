@@ -5,6 +5,7 @@ import { adminAddDayWisePackageController } from "./adminAddDayDetailedPackage";
 import { adminDeletePackageController } from "./deletePackage";
 import { adminDeleteDetailedPackageController } from "./deleteDetailedPackage";
 import { adminGetPackagesController } from "./adminGetPackages";
+import { adminGetDetailedPackageController } from "./adminGetDayDetailedPackage";
 
 
 export const adminController = (dependencies: IAdminDependencies) => {
@@ -14,6 +15,9 @@ export const adminController = (dependencies: IAdminDependencies) => {
         adminAddDayDetailedPackage:adminAddDayWisePackageController(dependencies),
         deletePackage:adminDeletePackageController(dependencies),
         deleteDeatailedPackage:adminDeleteDetailedPackageController(dependencies),
-        adminGetPackages:adminGetPackagesController(dependencies)
+        adminGetPackages:adminGetPackagesController(dependencies),
+        adminGetDayDetailedPackage:adminGetDetailedPackageController(dependencies),
+
+
     };
 };
