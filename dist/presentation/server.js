@@ -13,17 +13,26 @@ const adminDependencies_1 = require("@/boot/adminDependencies");
 dotenv_1.default.config(); // Load environment variables
 const app = (0, express_1.default)();
 const allowedOrigin = process.env.CLIENT_URL;
+console.log(allowedOrigin, "originhere");
 // CORS options
 const corsOptions = {
     origin: allowedOrigin,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
 };
+app.use((req, res, next) => {
+    console.log("🌐 RAW incoming:", req.method, req.url);
+    next();
+});
 // Middleware setup
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)(corsOptions));
+app.use((req, res, next) => {
+    console.log("➡️ Request received:", req.method, req.url, "Content-Type:", req.headers["content-type"]);
+    next();
+});
 app.use("/admin", (0, routers_1.adminRoutes)(adminDependencies_1.adminDependencies));
 // Default route
 app.use("*", (req, res) => {
