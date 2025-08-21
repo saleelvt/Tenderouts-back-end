@@ -15,7 +15,7 @@ const loginAdminController = (dependencies) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { email, password } = req.body;
-            console.log("Admin login attempt:", email, password);
+            console.log("Admin login attemptttttttttttttttttts:", email, password);
             // Check if both email and password are provided
             if (!email || !password) {
                 return res.status(400).json({ success: false, message: "Email and password are required" });
