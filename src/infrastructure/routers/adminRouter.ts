@@ -3,7 +3,7 @@ import { IAdminDependencies } from './../../application/admin/interfaces/IAdminD
 import { Router } from 'express';
 
 export const adminRoutes = (dependencies: IAdminDependencies) => {
-    const { loginAdmin,adminAddPackage,adminAddDayDetailedPackage,deletePackage ,deleteDeatailedPackage,adminGetPackages,adminGetDayDetailedPackage} = adminController(dependencies);
+    const { loginAdmin,adminAddPackage,adminAddDayDetailedPackage,deletePackage ,deleteDeatailedPackage,adminGetPackages,adminGetDayDetailedPackage,userGetDataByQuery} = adminController(dependencies);
     const router = Router();
     router.route("/login").post(loginAdmin); // No need to change this line.
     router.route("/addPackage").post(adminAddPackage); // No need to change this line.
@@ -11,6 +11,9 @@ export const adminRoutes = (dependencies: IAdminDependencies) => {
     router.route("/deletePackage/:id").delete(deletePackage); // No need to change this line.
     router.route("/addDayDetailedPackage").post(adminAddDayDetailedPackage);
       router.route("/getDetailedPackage").get(adminGetDayDetailedPackage); // No need to change this 
-    router.route("/deleteDetailedPackage").delete(deleteDeatailedPackage); // No need to change this line.
+    router.route("/deleteDetailedPackage/:id").delete(deleteDeatailedPackage); 
+
+    //user
+    router.route("/userGetDataByQuery").get(userGetDataByQuery);
     return router; 
 }

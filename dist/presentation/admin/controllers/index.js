@@ -8,6 +8,7 @@ const deletePackage_1 = require("./deletePackage");
 const deleteDetailedPackage_1 = require("./deleteDetailedPackage");
 const adminGetPackages_1 = require("./adminGetPackages");
 const adminGetDayDetailedPackage_1 = require("./adminGetDayDetailedPackage");
+const userGetDataByQueryController_1 = require("./userGetDataByQueryController");
 const adminController = (dependencies) => {
     return {
         loginAdmin: (0, adminLogin_1.loginAdminController)(dependencies), // No change needed here.
@@ -17,6 +18,7 @@ const adminController = (dependencies) => {
         deleteDeatailedPackage: (0, deleteDetailedPackage_1.adminDeleteDetailedPackageController)(dependencies),
         adminGetPackages: (0, adminGetPackages_1.adminGetPackagesController)(dependencies),
         adminGetDayDetailedPackage: (0, adminGetDayDetailedPackage_1.adminGetDetailedPackageController)(dependencies),
+        userGetDataByQuery: (0, userGetDataByQueryController_1.userGetDataByQueryController)(dependencies)
     };
 };
 exports.adminController = adminController;

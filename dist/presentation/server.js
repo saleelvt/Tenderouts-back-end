@@ -15,7 +15,10 @@ const app = (0, express_1.default)();
 const allowedOrigin = process.env.CLIENT_URL;
 // CORS options
 const corsOptions = {
-    origin: allowedOrigin,
+    origin: [
+        "http://localhost:5173", // probably your React app
+        "http://127.0.0.1:5500" // your HTML/JS test URL
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
 };
