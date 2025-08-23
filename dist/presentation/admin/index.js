@@ -20,3 +20,5 @@ __exportStar(require("./controllers/adminAddDayDetailedPackage"), exports);
 __exportStar(require("./controllers/deletePackage"), exports);
 __exportStar(require("./controllers/deleteDetailedPackage"), exports);
 __exportStar(require("./controllers/adminGetPackages"), exports);
+__exportStar(require("./controllers/adminGetDayDetailedPackage"), exports);
+__exportStar(require("./controllers/userGetDataByQueryController"), exports);

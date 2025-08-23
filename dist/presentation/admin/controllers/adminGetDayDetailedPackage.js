@@ -8,25 +8,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminDeleteDetailedPackageController = void 0;
+exports.adminGetDetailedPackageController = void 0;
 const adminAddDayDetailsSchema_1 = require("@/infrastructure/database/models/adminAddDayDetailsSchema");
-const mongoose_1 = __importDefault(require("mongoose"));
-const adminDeleteDetailedPackageController = (dependencies) => {
+const adminGetDetailedPackageController = (dependencies) => {
     return (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { id } = req.params;
-            if (!id || !mongoose_1.default.Types.ObjectId.isValid(id)) {
-                return res.status(400).json({ success: false, message: "Valid package ID is required." });
+            console.log("the teh detailed data of hte data : saleel ");
+            const data = yield adminAddDayDetailsSchema_1.AdminDayWiseDetails.find();
+            if (data.length <= 0 || data == null) {
+                return res.status(404).json({ success: false, message: "packages not fount ", role: "admin" });
             }
-            const deletedPackage = yield adminAddDayDetailsSchema_1.AdminDayWiseDetails.findByIdAndDelete(id);
-            if (!deletedPackage) {
-                return res.status(404).json({ success: false, message: "Package not found." });
-            }
-            return res.status(200).json({ success: true, message: "Detailed Package deleted successfully." });
+            console.log("the teh detailed data of hte data : ", data);
+            return res.status(200).json({ success: true, message: "Package fetched Succesfully", data });
         }
         catch (error) {
             console.error("Failed to log in admin:", error);
@@ -35,4 +29,4 @@ const adminDeleteDetailedPackageController = (dependencies) => {
         }
     });
 };
-exports.adminDeleteDetailedPackageController = adminDeleteDetailedPackageController;
+exports.adminGetDetailedPackageController = adminGetDetailedPackageController;

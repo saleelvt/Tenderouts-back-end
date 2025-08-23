@@ -2,26 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AddCategoryPrice = void 0;
 const mongoose_1 = require("mongoose");
+const priceSchema = new mongoose_1.Schema({
+    adult: { type: Number, required: true },
+    child: { type: Number, required: true },
+}, { _id: false } // don't create ObjectId for this subdocument
+);
 const adminAddCategoryAndPriceSchema = new mongoose_1.Schema({
-    categoryType: {
+    packageName: {
         type: String,
         required: true,
-        enum: ['Normal', 'Premium', 'Luxury']
+        trim: true,
     },
-    adultPrice: {
-        type: Number,
-        required: true,
-    },
-    childPrice: {
-        type: Number,
-        required: true,
-    },
-    AdultsCount: {
-        type: Number,
-        required: false,
-    },
-    ChildrenCount: {
-        type: Number,
+    description: {
+        type: String,
         required: false,
     },
     imageUrl: {
@@ -29,14 +22,20 @@ const adminAddCategoryAndPriceSchema = new mongoose_1.Schema({
         required: false,
         trim: true,
     },
-    packageName: {
-        type: String,
-        required: true,
+    adultCount: {
+        type: Number,
+        default: 1,
     },
-    description: {
-        type: String,
-        required: false,
-    }
+    childCount: {
+        type: Number,
+        default: 1,
+    },
+    // Instead of single category -> embed all categories
+    categories: {
+        Normal: { type: priceSchema, required: true },
+        Premium: { type: priceSchema, required: true },
+        Luxury: { type: priceSchema, required: true },
+    },
 }, {
     timestamps: true,
 });

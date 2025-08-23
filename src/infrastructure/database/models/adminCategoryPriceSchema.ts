@@ -1,42 +1,51 @@
 import { model, Schema } from "mongoose";
 
-const adminAddCategoryAndPriceSchema = new Schema({
-  categoryType: {
-    type: String,
-    required: true,
-    enum: ['Normal', 'Premium', 'Luxury']
+const priceSchema = new Schema(
+  {
+    adult: { type: Number, required: true },
+    child: { type: Number, required: true },
   },
-  adultPrice: {
-    type: Number,
-    required: true,
-  },
-  childPrice: {
-    type: Number,
-    required: true,
-  },
-  AdultsCount: {
-    type: Number,
-    required: false,
-  },
-  ChildrenCount: {
-    type: Number,
-    required: false,
-  },
-  imageUrl: {               // <-- Added field for image URL
-    type: String,
-    required: false,
-    trim: true,
-  },
-  packageName: {               // <-- Added field for image URL
-    type: String,
-    required: true,
-  },
-  description: {               // <-- Added field for image URL
-    type: String,
-    required: false,
-  }
-}, {
-  timestamps: true,
-});
+  { _id: false } // don't create ObjectId for this subdocument
+);
 
-export const AddCategoryPrice = model("AddCategoryPrice", adminAddCategoryAndPriceSchema);
+const adminAddCategoryAndPriceSchema = new Schema(
+  {
+    packageName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: false,
+    },
+    imageUrl: {
+      type: String,
+      required: false,
+      trim: true,
+    },
+    adultCount: {
+      type: Number,
+      default: 1,
+    },
+    childCount: {
+      type: Number,
+      default: 1,
+    },
+
+    // Instead of single category -> embed all categories
+    categories: {
+      Normal: { type: priceSchema, required: true },
+      Premium: { type: priceSchema, required: true },
+      Luxury: { type: priceSchema, required: true },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const AddCategoryPrice = model(
+  "AddCategoryPrice",
+  adminAddCategoryAndPriceSchema
+);

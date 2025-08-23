@@ -3,60 +3,83 @@ import { AddCategoryPrice } from "@/infrastructure/database/models/adminCategory
 import { NextFunction, Request, Response } from "express";
 
 export const adminAddPackageController = (dependencies: IAdminDependencies) => {
-  return async (req: Request, res: Response, next: NextFunction): Promise<void | any | null> => {
+  return async (req: Request, res: Response, next: NextFunction): Promise<void|null|any> => {
     try {
       console.log("The dataset for adding by the admin:", req.body);
 
-      // Destructure all expected fields from request body
       const {
         packageName,
         description,
-        categoryType,
-        adultPrice,
-        childPrice,
+        categories,
         adultCount,
         childCount,
         imageUrl,
       } = req.body;
 
-      // Basic required validation
-      if (!packageName || !categoryType || adultPrice === undefined || childPrice === undefined) {
+      // Basic validation
+      if (!packageName || !categories) {
         return res.status(400).json({
           success: false,
-          message: "packageName, categoryType, adultPrice, and childPrice are required",
+          message: "packageName and categories are required",
         });
       }
 
-      // Validate categoryType enum
-      const validCategories = ["Normal", "Premium", "Luxury"];
-      if (!validCategories.includes(categoryType)) {
+      // Ensure all required category types exist
+      const requiredCategories = ["Normal", "Premium", "Luxury"];
+      for (const type of requiredCategories) {
+        if (
+          !categories[type] ||
+          categories[type].adult === undefined ||
+          categories[type].child === undefined
+        ) {
+          return res.status(400).json({
+            success: false,
+            message: `Missing prices for ${type} category (adult & child required)`,
+          });
+        }
+      }
+
+      // Prevent duplicate package by name
+      const existingPackage = await AddCategoryPrice.findOne({ packageName });
+      if (existingPackage) {
         return res.status(400).json({
           success: false,
-          message: `Invalid categoryType. Allowed values: ${validCategories.join(", ")}`,
+          message: `Package with name "${packageName}" already exists`,
         });
       }
 
-      // Create new document with all fields
-      const newCategoryPrice = new AddCategoryPrice({
+      // Construct new package document
+      const newPackage = new AddCategoryPrice({
         packageName,
         description: description || "",
-        categoryType,
-        adultPrice,
-        childPrice,
-        AdultsCount: adultCount || 1, 
-        ChildrenCount: childCount || 1,
+        categories: {
+          Normal: {
+            adult: categories.Normal.adult,
+            child: categories.Normal.child,
+          },
+          Premium: {
+            adult: categories.Premium.adult,
+            child: categories.Premium.child,
+          },
+          Luxury: {
+            adult: categories.Luxury.adult,
+            child: categories.Luxury.child,
+          },
+        },
+        adultCount: adultCount || 1,
+        childCount: childCount || 1,
         imageUrl: imageUrl || "",
       });
 
-      await newCategoryPrice.save();
+      await newPackage.save();
 
       return res.status(201).json({
         success: true,
-        message: "Category, prices, counts, and image successfully added",
-        data: newCategoryPrice,
+        message: "Package with all categories successfully added",
+        data: newPackage,
       });
     } catch (error) {
-      console.error("Failed to add category and price:", error);
+      console.error("Failed to add package with categories:", error);
       next(error);
     }
   };
