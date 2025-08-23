@@ -16,7 +16,7 @@ const corsOptions = {
   origin: [
       "http://localhost:5173", // probably your React app
       "http://127.0.0.1:5500",
-      "https://tenderouts-back-end.onrender.com",  // your HTML/JS test URL
+      "https://tenderouts-admin-front-end.vercel.app",  // your HTML/JS test URL
     ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
