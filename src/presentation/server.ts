@@ -14,7 +14,7 @@ const allowedOrigin = process.env.CLIENT_URL;
 // CORS options
 const corsOptions = {
   origin: [
-      "http://localhost:5173", // probably your React app
+      "http://localhost:5173", 
       "http://127.0.0.1:5500",
       "https://tenderouts-admin-front-end.vercel.app",  // your HTML/JS test URL
     ],
