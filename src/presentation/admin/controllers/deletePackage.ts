@@ -11,7 +11,6 @@ export const adminDeletePackageController = (dependencies: IAdminDependencies) =
       if (!id || !mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ success: false, message: "Valid package ID is required." });
       }
-
       const deletedPackage = await AddCategoryPrice.findByIdAndDelete(id);
 
       if (!deletedPackage) {
