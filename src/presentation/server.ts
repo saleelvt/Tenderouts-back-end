@@ -16,6 +16,7 @@ const corsOptions = {
   origin: [
       "http://localhost:5173", 
       "http://127.0.0.1:5500",
+      "https://tenderoutes-public-plqc.vercel.app",
       "https://tenderouts-admin-front-end.vercel.app",  // your HTML/JS test URL
     ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
